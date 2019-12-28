@@ -26,12 +26,12 @@
 #define TANK_HEIGHT_CM  ( BOTTOM_CM - TOP_CM )
 
 // Low battery alarm
-// #define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 4500 )  // 4.500V
-#define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 1000 )  // 1.000V
+// #define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 4800 )  // 4.800V
+#define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 2000 )  // 2.000V
 
 // Blink timing
-#define BLINK_ON_TIME ( 500 )
-#define BLINK_OFF_TIME ( 1000 )
+#define BLINK_ON_TIME ( 1000 )
+#define BLINK_OFF_TIME ( 500 )
 
 // Globals
 Ultrasonic ultrasonic(DISTANCE_SENSOR_PIN);
@@ -124,8 +124,9 @@ void updateUI(long cm) {
     barPixels = ( DISPLAY_WIDTH * fillFactor ) / 1000;
   }
 
-  long batteryVoltage = readVcc() / 100; // Just 1 decimal
-  formatDecimals( lcBattVoltsStr, batteryVoltage, 10, "V" );
+  long batteryVoltage = readVcc();
+  long batteryVoltage1dec = batteryVoltage / 100; // Just 1 decimal
+  formatDecimals( lcBattVoltsStr, batteryVoltage1dec, 10, "V" );
 
   #ifdef SERIAL_OUTPUT_ENABLED
   Serial.print(lcPctStr);
@@ -148,7 +149,13 @@ void updateUI(long cm) {
 
     u8g.setFont(u8g_font_fub11r);
     drawStrLeft( lcDistanceStr, DISPLAY_MAXY );
-    drawStrRight( lcBattVoltsStr, DISPLAY_MAXY );
+
+    if ( batteryVoltage <= LOWBATT_PANIC_MODE_THRESHOLD_MV ) {
+      if ( currentBlinkON )
+        drawStrRight( lcBattVoltsStr, DISPLAY_MAXY );
+    } else {
+      drawStrRight( lcBattVoltsStr, DISPLAY_MAXY );
+    }
 
     if ( currentBlinkON ) {
       u8g.drawDisc( (DISPLAY_MAXX-DISPLAY_MINX)/2, 58, 4 );
