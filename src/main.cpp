@@ -1,110 +1,17 @@
 #include "Arduino.h"
 #include "U8glib.h"
+#include "config.h"
 #include "ultrasonic.h"
-
-// Serial output (comment to disable)
-// #define SERIAL_OUTPUT_ENABLED
-
-// Distance sensor
-#define DISTANCE_SENSOR_PIN ( A0 )
-
-// Display
-#define DISPLAY_WIDTH       ( 128 )
-#define DISPLAY_HEIGHT      ( 64 )
-#define DISPLAY_MINX        ( 0 )
-#define DISPLAY_MINY        ( 0 )
-#define DISPLAY_MAXX        ( DISPLAY_MINX + DISPLAY_WIDTH - 1 )
-#define DISPLAY_MAXY        ( DISPLAY_MINY + DISPLAY_HEIGHT - 1 )
-
-// Level calibration
-#define DIST2FLOOR_CM   ( 120 )
-#define BASEMARGIN_CM   (   5 )
-
-#define BOTTOM_CM       ( DIST2FLOOR_CM - BASEMARGIN_CM )
-#define MINTOPREAD_CM   (  30 ) // ????
-#define TOP_CM          ( MINTOPREAD_CM )
-#define TANK_HEIGHT_CM  ( BOTTOM_CM - TOP_CM )
-
-// Low battery alarm
-// #define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 4800 )  // 4.800V
-#define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 2000 )  // 2.000V
-
-// Blink timing
-#define BLINK_ON_TIME ( 1000 )
-#define BLINK_OFF_TIME ( 500 )
+#include "readvcc.h"
+#include "utils.h"
+#include "u8gutils.h"
 
 // Globals
 Ultrasonic ultrasonic(DISTANCE_SENSOR_PIN);
-U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE|U8G_I2C_OPT_DEV_0);  // I2C / TWI
+DISPLAY_CLASS u8g(U8G_I2C_OPT_NONE|U8G_I2C_OPT_DEV_0);  // I2C / TWI
 unsigned long lastBlink;
 bool currentBlinkON;
 
-// *****************************************************************
-// ***
-// *** readVcc()
-// ***
-// *** Calculates elapsed milliseconds between actions
-// ***
-// *** Code from http://provideyourown.com/2012/secret-arduino-voltmeter-measure-battery-voltage/
-// ***
-// *** CHECK: https://github.com/Yveaux/arduino_vcc
-// ***
-long readVcc()
-{
-  // Read 1.1V reference against AVcc
-  // set the reference to Vcc and the measurement to the internal 1.1V reference
-  #if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-    ADMUX = _BV(REFS0) | _BV(MUX4) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
-  #elif defined (__AVR_ATtiny24__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
-    ADMUX = _BV(MUX5) | _BV(MUX0);
-  #elif defined (__AVR_ATtiny25__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
-    ADMUX = _BV(MUX3) | _BV(MUX2);
-  #else
-    ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
-  #endif
-
-  delay(2); // Wait for Vref to settle
-  ADCSRA |= _BV(ADSC); // Start conversion
-  while (bit_is_set(ADCSRA,ADSC)); // measuring
-
-  uint8_t low  = ADCL; // must read ADCL first - it then locks ADCH
-  uint8_t high = ADCH; // unlocks both
-
-  long result = (high<<8) | low;
-
-  result = 1125300L / result; // Calculate Vcc (in mV); 1125300 = 1.1*1023*1000
-  return result; // Vcc in millivolts
-}
-
-void clearScreen()
-{
-  u8g.firstPage();
-  do {} while( u8g.nextPage() );
-}
-
-void drawStrLeft(const char *str, u8g_uint_t y) {
-  u8g.drawStr( DISPLAY_MINX, y, str );
-}
-
-void drawStrRight(const char *str, u8g_uint_t y) {
-  u8g_uint_t strWidth = u8g.getStrWidth(str);
-  u8g_uint_t x = DISPLAY_MINX + ( DISPLAY_WIDTH - strWidth );
-
-  u8g.drawStr( x, y, str );
-}
-
-void drawStrCentered(const char *str, u8g_uint_t y) {
-  u8g_uint_t strWidth = u8g.getStrWidth(str);
-  u8g_uint_t x = DISPLAY_MINX + ( (DISPLAY_WIDTH - strWidth) / 2 );
-
-  u8g.drawStr( x, y, str );
-}
-
-void formatDecimals(char* buf, long val, int decimals, const char* suffix) {
-    int intPart = val / decimals;
-    int decimalPart = val % decimals;
-    sprintf( buf, "%d.%d%s", intPart, decimalPart, suffix );
-}
 
 void updateUI(long cm) {
   long distFromBottom = BOTTOM_CM - cm;
@@ -140,7 +47,7 @@ void updateUI(long cm) {
   u8g.firstPage();
   do {
     u8g.setFont(u8g_font_fub30r);
-    drawStrCentered( lcPctStr, 32 );
+    drawStrCentered( u8g, lcPctStr, 32 );
 
     if (barPixels != -1) {
       u8g.drawBox( DISPLAY_MINX+1, 38, barPixels-1, 8 );
@@ -148,13 +55,13 @@ void updateUI(long cm) {
     }
 
     u8g.setFont(u8g_font_fub11r);
-    drawStrLeft( lcDistanceStr, DISPLAY_MAXY );
+    drawStrLeft( u8g, lcDistanceStr, DISPLAY_MAXY );
 
     if ( batteryVoltage <= LOWBATT_PANIC_MODE_THRESHOLD_MV ) {
       if ( currentBlinkON )
-        drawStrRight( lcBattVoltsStr, DISPLAY_MAXY );
+        drawStrRight( u8g, lcBattVoltsStr, DISPLAY_MAXY );
     } else {
-      drawStrRight( lcBattVoltsStr, DISPLAY_MAXY );
+      drawStrRight( u8g, lcBattVoltsStr, DISPLAY_MAXY );
     }
 
     if ( currentBlinkON ) {
