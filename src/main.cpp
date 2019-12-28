@@ -2,6 +2,9 @@
 #include "U8glib.h"
 #include "ultrasonic.h"
 
+// Serial output (comment to disable)
+// #define SERIAL_OUTPUT_ENABLED
+
 // Distance sensor
 #define DISTANCE_SENSOR_PIN ( A0 )
 
@@ -119,12 +122,14 @@ void updateUI(long cm) {
   long batteryVoltage = readVcc() / 100; // Just 1 decimal
   formatDecimals( lcBattVoltsStr, batteryVoltage, 10, "V" );
 
+  #ifdef SERIAL_OUTPUT_ENABLED
   Serial.print(lcPctStr);
   Serial.print(" - ");
   Serial.print(lcDistanceStr);
   Serial.print(" - ");
   Serial.print(lcBattVoltsStr);
   Serial.println();
+  #endif
 
   u8g.firstPage();
   do {
@@ -143,8 +148,11 @@ void updateUI(long cm) {
 }
 
 void setup() {
-  u8g.setColorIndex(1);
+  #ifdef SERIAL_OUTPUT_ENABLED
   Serial.begin(9600);
+  #endif
+
+  u8g.setColorIndex(1);
 }
 
 void loop() {
