@@ -29,10 +29,15 @@
 // #define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 4500 )  // 4.500V
 #define LOWBATT_PANIC_MODE_THRESHOLD_MV  ( 1000 )  // 1.000V
 
+// Blink timing
+#define BLINK_ON_TIME ( 500 )
+#define BLINK_OFF_TIME ( 1000 )
+
 // Globals
 Ultrasonic ultrasonic(DISTANCE_SENSOR_PIN);
 U8GLIB_SSD1306_128X64 u8g(U8G_I2C_OPT_NONE|U8G_I2C_OPT_DEV_0);  // I2C / TWI
-
+unsigned long lastBlink;
+bool currentBlinkON;
 
 // *****************************************************************
 // ***
@@ -145,6 +150,10 @@ void updateUI(long cm) {
     drawStrLeft( lcDistanceStr, DISPLAY_MAXY );
     drawStrRight( lcBattVoltsStr, DISPLAY_MAXY );
 
+    if ( currentBlinkON ) {
+      u8g.drawDisc( (DISPLAY_MAXX-DISPLAY_MINX)/2, 58, 4 );
+    }
+
   } while( u8g.nextPage() );
 }
 
@@ -154,11 +163,28 @@ void setup() {
   #endif
 
   u8g.setColorIndex(1);
+  lastBlink = millis();
+  currentBlinkON = true;
 }
 
 void loop() {
   ultrasonic.DistanceMeasure();
   long distance = ultrasonic.microsecondsToCentimeters();
+
+  unsigned long blinkElapsed = millis() - lastBlink;
+
+  if (currentBlinkON) {
+    if (blinkElapsed >= BLINK_ON_TIME) {
+      currentBlinkON = !currentBlinkON;
+      lastBlink = millis();
+    }
+  } else {
+    if (blinkElapsed >= BLINK_OFF_TIME) {
+      currentBlinkON = !currentBlinkON;
+      lastBlink = millis();
+    }
+  }
+
   updateUI(distance);
   delay(10);
 }
