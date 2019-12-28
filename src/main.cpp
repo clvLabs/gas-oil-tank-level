@@ -138,6 +138,7 @@ void updateUI(long cm) {
 
     if (barPixels != -1) {
       u8g.drawBox( DISPLAY_MINX+1, 38, barPixels-1, 8 );
+      u8g.drawLine( DISPLAY_MAXX, 38, DISPLAY_MAXX, 38+8 );
     }
 
     u8g.setFont(u8g_font_fub11r);
