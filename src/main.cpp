@@ -22,7 +22,7 @@ void updateUI(long cm) {
 
   sprintf( lcDistanceStr, "%ldcm", cm );
 
-  if (distFromBottom < 1) {
+  if (distFromBottom < 0) {
     sprintf( lcPctStr, "+%ld!!", (distFromBottom*-1) );
   } else {
     long fillFactor = (distFromBottom * 1000) / TANK_HEIGHT_CM;
