@@ -1,0 +1,208 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Module:Arduino_Nano_v3.x A1
+U 1 1 5E332F7B
+P 4200 3650
+F 0 "A1" H 4200 5150 50  0000 C CNN
+F 1 "Arduino_Nano_v3.x" H 4200 5050 50  0000 C CNN
+F 2 "Module:Arduino_Nano" H 4200 3650 50  0001 C CIN
+F 3 "http://www.mouser.com/pdfdocs/Gravitech_Arduino_Nano3_0.pdf" H 4200 3650 50  0001 C CNN
+	1    4200 3650
+	1    0    0    -1  
+$EndComp
+Text GLabel 4700 3650 2    50   Input ~ 0
+DISTANCE_SENSOR_PIN
+Text GLabel 4700 4050 2    50   Input ~ 0
+I2C_SDA
+Text GLabel 4700 4150 2    50   Input ~ 0
+I2C_SCL
+$Comp
+L power:+5V #PWR0101
+U 1 1 5E334DA3
+P 4400 2650
+F 0 "#PWR0101" H 4400 2500 50  0001 C CNN
+F 1 "+5V" H 4415 2823 50  0000 C CNN
+F 2 "" H 4400 2650 50  0001 C CNN
+F 3 "" H 4400 2650 50  0001 C CNN
+	1    4400 2650
+	1    0    0    -1  
+$EndComp
+Text GLabel 4100 2650 0    50   Input ~ 0
+VIN
+$Comp
+L power:GND #PWR0102
+U 1 1 5E335A3D
+P 4200 4650
+F 0 "#PWR0102" H 4200 4400 50  0001 C CNN
+F 1 "GND" H 4205 4477 50  0000 C CNN
+F 2 "" H 4200 4650 50  0001 C CNN
+F 3 "" H 4200 4650 50  0001 C CNN
+	1    4200 4650
+	1    0    0    -1  
+$EndComp
+Text GLabel 8650 3500 0    50   Input ~ 0
+I2C_SDA
+Text GLabel 8650 3600 0    50   Input ~ 0
+I2C_SCL
+$Comp
+L Device:R R1
+U 1 1 5E338F7A
+P 8800 3500
+F 0 "R1" V 8593 3500 50  0000 C CNN
+F 1 "3.3K" V 8684 3500 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal" V 8730 3500 50  0001 C CNN
+F 3 "~" H 8800 3500 50  0001 C CNN
+	1    8800 3500
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5E339528
+P 8800 3600
+F 0 "R2" V 8915 3600 50  0000 C CNN
+F 1 "3.3K" V 9006 3600 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P12.70mm_Horizontal" V 8730 3600 50  0001 C CNN
+F 3 "~" H 8800 3600 50  0001 C CNN
+	1    8800 3600
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR0103
+U 1 1 5E339A07
+P 9050 3500
+F 0 "#PWR0103" H 9050 3350 50  0001 C CNN
+F 1 "+5V" H 9065 3673 50  0000 C CNN
+F 2 "" H 9050 3500 50  0001 C CNN
+F 3 "" H 9050 3500 50  0001 C CNN
+	1    9050 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8950 3500 9050 3500
+Wire Wire Line
+	8950 3600 9050 3600
+Wire Wire Line
+	9050 3600 9050 3500
+Connection ~ 9050 3500
+$Comp
+L Connector:Conn_01x03_Female J3
+U 1 1 5E33A70A
+P 7550 4300
+F 0 "J3" H 7400 4650 50  0000 L CNN
+F 1 "Conn_01x03_Female" H 7100 4550 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical" H 7550 4300 50  0001 C CNN
+F 3 "~" H 7550 4300 50  0001 C CNN
+	1    7550 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x04_Female J2
+U 1 1 5E33B2BA
+P 7550 3500
+F 0 "J2" H 7350 3850 50  0000 L CNN
+F 1 "Conn_01x04_Female" H 7100 3750 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical" H 7550 3500 50  0001 C CNN
+F 3 "~" H 7550 3500 50  0001 C CNN
+	1    7550 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5E33DBCC
+P 7350 3400
+F 0 "#PWR0104" H 7350 3150 50  0001 C CNN
+F 1 "GND" V 7355 3272 50  0000 R CNN
+F 2 "" H 7350 3400 50  0001 C CNN
+F 3 "" H 7350 3400 50  0001 C CNN
+	1    7350 3400
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR0105
+U 1 1 5E33E7B3
+P 7350 3500
+F 0 "#PWR0105" H 7350 3350 50  0001 C CNN
+F 1 "+5V" V 7365 3628 50  0000 L CNN
+F 2 "" H 7350 3500 50  0001 C CNN
+F 3 "" H 7350 3500 50  0001 C CNN
+	1    7350 3500
+	0    -1   -1   0   
+$EndComp
+Text GLabel 7350 3600 0    50   Input ~ 0
+I2C_SCL
+Text GLabel 7350 3700 0    50   Input ~ 0
+I2C_SDA
+$Comp
+L power:GND #PWR0106
+U 1 1 5E344AA7
+P 7350 4200
+F 0 "#PWR0106" H 7350 3950 50  0001 C CNN
+F 1 "GND" V 7355 4072 50  0000 R CNN
+F 2 "" H 7350 4200 50  0001 C CNN
+F 3 "" H 7350 4200 50  0001 C CNN
+	1    7350 4200
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR0107
+U 1 1 5E344D16
+P 7350 4300
+F 0 "#PWR0107" H 7350 4150 50  0001 C CNN
+F 1 "+5V" V 7365 4428 50  0000 L CNN
+F 2 "" H 7350 4300 50  0001 C CNN
+F 3 "" H 7350 4300 50  0001 C CNN
+	1    7350 4300
+	0    -1   -1   0   
+$EndComp
+Text GLabel 7350 4400 0    50   Input ~ 0
+DISTANCE_SENSOR_PIN
+$Comp
+L Connector:Conn_01x02_Female J1
+U 1 1 5E346DE0
+P 7550 2800
+F 0 "J1" H 7350 3050 50  0000 L CNN
+F 1 "Conn_01x02_Female" H 7000 2950 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 7550 2800 50  0001 C CNN
+F 3 "~" H 7550 2800 50  0001 C CNN
+	1    7550 2800
+	1    0    0    -1  
+$EndComp
+Text GLabel 7350 2900 0    50   Input ~ 0
+VIN
+$Comp
+L power:GND #PWR0108
+U 1 1 5E349E98
+P 7350 2800
+F 0 "#PWR0108" H 7350 2550 50  0001 C CNN
+F 1 "GND" V 7355 2672 50  0000 R CNN
+F 2 "" H 7350 2800 50  0001 C CNN
+F 3 "" H 7350 2800 50  0001 C CNN
+	1    7350 2800
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0109
+U 1 1 5E378526
+P 4300 4650
+F 0 "#PWR0109" H 4300 4400 50  0001 C CNN
+F 1 "GND" H 4305 4477 50  0000 C CNN
+F 2 "" H 4300 4650 50  0001 C CNN
+F 3 "" H 4300 4650 50  0001 C CNN
+	1    4300 4650
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
