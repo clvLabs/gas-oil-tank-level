@@ -16,10 +16,7 @@
 #define DISPLAY_MAXY        ( DISPLAY_MINY + DISPLAY_HEIGHT - 1 )
 
 // Level calibration
-#define DIST2FLOOR_CM   ( 120 )
-#define BASEMARGIN_CM   (   5 )
-
-#define BOTTOM_CM       ( DIST2FLOOR_CM - BASEMARGIN_CM )
+#define BOTTOM_CM       ( 119 )
 #define MINTOPREAD_CM   (  30 ) // ????
 #define TOP_CM          ( MINTOPREAD_CM )
 #define TANK_HEIGHT_CM  ( BOTTOM_CM - TOP_CM )
