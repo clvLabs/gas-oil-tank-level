@@ -17,8 +17,7 @@
 
 // Level calibration
 #define BOTTOM_CM       ( 119 )
-#define MINTOPREAD_CM   (  30 ) // ????
-#define TOP_CM          ( MINTOPREAD_CM )
+#define TOP_CM          (  27 )
 #define TANK_HEIGHT_CM  ( BOTTOM_CM - TOP_CM )
 
 // Low battery alarm
