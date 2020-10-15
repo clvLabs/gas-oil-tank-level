@@ -21,6 +21,8 @@ static const uint8_t BUTTON_DEBOUNCE_MS = 25;
 static const bool BUTTON_INTERNAL_PULLUP = false;
 static const bool BUTTON_INVERT = false;
 static const int BUTTON_HOLD_TIME = 2000;
+static const int BUTTON_RAMP1_TIME = 500;
+static const int BUTTON_RAMP2_TIME = 4000;
 
 static const uint8_t BUTTON_UP_PIN = 3;
 static const uint8_t BUTTON_DOWN_PIN = 4;

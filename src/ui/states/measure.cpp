@@ -69,7 +69,7 @@ namespace ui
         if (!UIState::afterPaint())
             return false;
 
-        if (btnUp->pressedFor(BUTTON_HOLD_TIME) || btnDown->pressedFor(BUTTON_HOLD_TIME))
+        if (btnUp->pressedFor(BUTTON_HOLD_TIME) && btnDown->pressedFor(BUTTON_HOLD_TIME))
         {
             ui->setCurrState(UIState::SETTINGS);
             return false;

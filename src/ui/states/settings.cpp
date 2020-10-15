@@ -59,7 +59,7 @@ namespace ui
         if (!UIState::afterPaint())
             return false;
 
-        if (btnUp->pressedFor(BUTTON_HOLD_TIME) || btnDown->pressedFor(BUTTON_HOLD_TIME))
+        if (btnUp->pressedFor(BUTTON_HOLD_TIME) && btnDown->pressedFor(BUTTON_HOLD_TIME))
         {
             switch (currentField)
             {
@@ -93,10 +93,38 @@ namespace ui
             if (*pValue > pMin)
                 (*pValue)--;
         }
+        else if (btnDown->pressedFor(BUTTON_RAMP2_TIME) && !btnUp->isPressed())
+        {
+            if (*pValue > pMin+4)
+                (*pValue)-=5;
+            else
+                (*pValue)=pMin;
+        }
+        else if (btnDown->pressedFor(BUTTON_RAMP1_TIME) && !btnUp->isPressed())
+        {
+            if (*pValue > pMin)
+                (*pValue)--;
+            else
+                (*pValue)=pMin;
+        }
         else if (btnUp->wasReleased())
         {
             if (*pValue < pMax)
                 (*pValue)++;
+        }
+        else if (btnUp->pressedFor(BUTTON_RAMP2_TIME) && !btnDown->isPressed())
+        {
+            if (*pValue < pMax-4)
+                (*pValue)+=5;
+            else
+                (*pValue)=pMax;
+        }
+        else if (btnUp->pressedFor(BUTTON_RAMP1_TIME) && !btnDown->isPressed())
+        {
+            if (*pValue < pMax)
+                (*pValue)++;
+            else
+                (*pValue)=pMax;
         }
     }
 
