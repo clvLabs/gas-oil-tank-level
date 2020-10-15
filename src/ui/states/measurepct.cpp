@@ -1,30 +1,28 @@
 #include "../../utils/eepromcfg.h"
 #include "../uimgr.h"
-#include "./measure.h"
+#include "./measurepct.h"
 
 namespace ui
 {
 
-    Measure::Measure(UIMgr *pUI)
+    MeasurePct::MeasurePct(UIMgr *pUI)
         : UIState(pUI)
     {
-        lastBlink = millis();
         fillFactor = -1;
-        currentBlinkON = true;
         batteryWarning = false;
     };
 
-    void Measure::setup()
+    void MeasurePct::setup()
     {
         UIState::setup();
         pingSensor = new NewPing(PING_TRIGGER_PIN, PING_ECHO_PIN, PING_MAX_DISTANCE);
     }
 
-    void Measure::beforePaint()
+    void MeasurePct::beforePaint()
     {
         UIState::beforePaint();
 
-        calcDistance();
+        calcData();
 
 #ifdef SERIAL_OUTPUT_ENABLED
         Serial.print(pctStr);
@@ -36,7 +34,7 @@ namespace ui
 #endif
     }
 
-    void Measure::paint()
+    void MeasurePct::paint()
     {
         UIState::paint();
 
@@ -64,7 +62,7 @@ namespace ui
         }
     }
 
-    bool Measure::afterPaint()
+    bool MeasurePct::afterPaint()
     {
         if (!UIState::afterPaint())
             return false;
@@ -74,11 +72,16 @@ namespace ui
             ui->setCurrState(UIState::SETTINGS);
             return false;
         }
+        else if (btnUp->wasReleased() || btnDown->wasReleased())
+        {
+            ui->setCurrState(UIState::MEASURECM);
+            return false;
+        }
 
         return true;
     }
 
-    void Measure::calcDistance()
+    void MeasurePct::calcData()
     {
         unsigned long cm = pingSensor->ping_cm();
         long distFromBottom = ui->cfg->data.minLevelCm - cm;

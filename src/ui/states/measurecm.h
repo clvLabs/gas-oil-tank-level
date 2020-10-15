@@ -12,24 +12,20 @@
 namespace ui
 {
 
-    class Measure : public UIState
+    class MeasureCm : public UIState
     {
         NewPing *pingSensor;
 
-        long fillFactor;
         char distanceStr[20];
-        char pctStr[20];
-        char batteryStr[20];
-        bool batteryWarning;
 
     public:
-        Measure(UIMgr *pUI);
+        MeasureCm(UIMgr *pUI);
 
         void setup();
         void beforePaint();
         void paint();
         bool afterPaint();
-        void calcDistance();
+        void calcData();
     };
 
 } // namespace ui

@@ -4,7 +4,8 @@
 #include "../utils/battery.h"
 #include "../utils/utils.h"
 #include "../utils/eepromcfg.h"
-#include "./states/measure.h"
+#include "./states/measurepct.h"
+#include "./states/measurecm.h"
 #include "./states/settings.h"
 
 namespace ui
@@ -21,12 +22,14 @@ namespace ui
         numstates = 0;
         currstate = -1;
 
-        states[UIState::MEASURE] = new Measure(this);
+        states[UIState::MEASUREPCT] = new MeasurePct(this);
+        numstates++;
+        states[UIState::MEASURECM] = new MeasureCm(this);
         numstates++;
         states[UIState::SETTINGS] = new Settings(this);
         numstates++;
 
-        setCurrState(UIState::MEASURE);
+        setCurrState(UIState::MEASUREPCT);
 
         for (int i = 0; i < numstates; i++)
         {

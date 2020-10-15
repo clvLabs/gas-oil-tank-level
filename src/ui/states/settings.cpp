@@ -71,7 +71,7 @@ namespace ui
 
             case 1:
                 ui->cfg->write();
-                ui->setCurrState(UIState::MEASURE);
+                ui->setCurrState(UIState::MEASUREPCT);
                 return false;
                 break;
 

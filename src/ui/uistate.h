@@ -14,8 +14,9 @@ namespace ui
     {
     public:
         // State constants
-        const static int MEASURE = 0;
-        const static int SETTINGS = 1;
+        const static int MEASUREPCT = 0;
+        const static int MEASURECM = 1;
+        const static int SETTINGS = 2;
 
     protected:
         UIMgr *ui;
