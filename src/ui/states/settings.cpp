@@ -1,27 +1,27 @@
 #include "../../utils/eepromcfg.h"
 #include "../uimgr.h"
-#include "./config.h"
+#include "./settings.h"
 
 namespace ui
 {
 
-    Config::Config(UIMgr *pUI)
+    Settings::Settings(UIMgr *pUI)
         : UIState(pUI), currentField(0)
     {
     }
 
-    void Config::setup()
+    void Settings::setup()
     {
         UIState::setup();
     }
 
-    void Config::onEnter()
+    void Settings::onEnter()
     {
         UIState::onEnter();
         currentField = 0;
     }
 
-    void Config::beforePaint()
+    void Settings::beforePaint()
     {
         UIState::beforePaint();
 
@@ -39,7 +39,7 @@ namespace ui
             sprintf(valueStr, "???");
     }
 
-    void Config::paint()
+    void Settings::paint()
     {
         UIState::paint();
 
@@ -54,7 +54,7 @@ namespace ui
         drawStrCentered(*display, valueStr, 50);
     }
 
-    bool Config::afterPaint()
+    bool Settings::afterPaint()
     {
         if (!UIState::afterPaint())
             return false;
@@ -83,7 +83,7 @@ namespace ui
         return true;
     }
 
-    void Config::updateValue(unsigned int *pValue, unsigned int pMin, unsigned int pMax)
+    void Settings::updateValue(unsigned int *pValue, unsigned int pMin, unsigned int pMax)
     {
         if (waitingButtonRelease)
             return;

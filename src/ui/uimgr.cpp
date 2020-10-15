@@ -5,7 +5,7 @@
 #include "../utils/utils.h"
 #include "../utils/eepromcfg.h"
 #include "./states/measure.h"
-#include "./states/config.h"
+#include "./states/settings.h"
 
 namespace ui
 {
@@ -23,7 +23,7 @@ namespace ui
 
         states[UIState::MEASURE] = new Measure(this);
         numstates++;
-        states[UIState::CONFIG] = new Config(this);
+        states[UIState::SETTINGS] = new Settings(this);
         numstates++;
 
         setCurrState(UIState::MEASURE);

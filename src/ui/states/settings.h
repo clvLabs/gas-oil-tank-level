@@ -12,13 +12,13 @@
 namespace ui
 {
 
-    class Config : public UIState
+    class Settings : public UIState
     {
         int currentField;
         char valueStr[20];
 
     public:
-        Config(UIMgr *pUI);
+        Settings(UIMgr *pUI);
 
         void setup();
         void loop();

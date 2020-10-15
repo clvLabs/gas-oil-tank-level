@@ -71,7 +71,7 @@ namespace ui
 
         if (btnUp->pressedFor(BUTTON_HOLD_TIME) || btnDown->pressedFor(BUTTON_HOLD_TIME))
         {
-            ui->setCurrState(UIState::CONFIG);
+            ui->setCurrState(UIState::SETTINGS);
             return false;
         }
 
