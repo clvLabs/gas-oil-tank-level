@@ -1,4 +1,6 @@
+#include "../../config.h"
 #include "../../utils/eepromcfg.h"
+#include "../../utils/u8gutils.h"
 #include "../uimgr.h"
 #include "./measurecm.h"
 

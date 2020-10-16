@@ -1,6 +1,4 @@
-#include "U8glib.h"
-#include "Arduino.h"
-#include "config.h"
+#include "u8gutils.h"
 
 void clearScreen(DISPLAY_CLASS &u8g)
 {

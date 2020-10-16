@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
-#include "U8glib.h"
 #include "../config.h"
 #include "../3rdParty/JC_Button/JC_Button.h"
 

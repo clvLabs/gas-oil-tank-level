@@ -1,7 +1,5 @@
 #pragma once
 
-#include "U8glib.h"
-#include "Arduino.h"
 #include "config.h"
 
 void clearScreen(DISPLAY_CLASS &u8g);

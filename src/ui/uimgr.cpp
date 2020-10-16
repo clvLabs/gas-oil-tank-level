@@ -1,12 +1,7 @@
-#include "./uimgr.h"
-
-#include "../utils/u8gutils.h"
-#include "../utils/battery.h"
-#include "../utils/utils.h"
-#include "../utils/eepromcfg.h"
 #include "./states/measurepct.h"
 #include "./states/measurecm.h"
 #include "./states/settings.h"
+#include "./uimgr.h"
 
 namespace ui
 {

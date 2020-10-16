@@ -1,6 +1,6 @@
+#include "EEPROM.h"
 #include "config.h"
 #include "eepromcfg.h"
-#include "EEPROM.h"
 
 EEPROMCfg::EEPROMCfg()
 {

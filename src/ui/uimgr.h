@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Arduino.h"
-#include "U8glib.h"
+#include "../config.h"
+#include "../utils/eepromcfg.h"
 #include "./uistate.h"
 
 class EEPROMCfg;

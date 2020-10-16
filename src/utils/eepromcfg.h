@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Arduino.h"
-
 // EEPROM stored configuration
 struct _EEPROM_Config
 {

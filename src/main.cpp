@@ -1,8 +1,6 @@
 #include "Arduino.h"
-#include "U8glib.h"
 #include "3rdParty/JC_Button/JC_Button.h"
 #include "config.h"
-#include "utils/utils.h"
 #include "utils/eepromcfg.h"
 #include "ui/uimgr.h"
 

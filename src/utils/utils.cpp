@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "config.h"
+#include "utils.h"
 
 void formatDecimals(char *buf, long val, int decimals, const char *suffix)
 {

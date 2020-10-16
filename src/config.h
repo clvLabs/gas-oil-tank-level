@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Arduino.h"
+#include "U8glib.h"
 
 // Program EEPROM signature
 static const int PROGRAM_EEPROM_SIGNATURE = 3014;

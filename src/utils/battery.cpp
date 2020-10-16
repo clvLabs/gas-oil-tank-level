@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include "readvcc.h"
 #include "utils.h"
 
