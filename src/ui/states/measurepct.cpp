@@ -83,7 +83,8 @@ namespace ui
 
     void MeasurePct::calcData()
     {
-        unsigned long cm = pingSensor->ping_cm();
+        // unsigned long cm = pingSensor->ping_cm();
+        unsigned long cm = pingSensor->convert_cm(pingSensor->ping_median());
         long distFromBottom = ui->cfg->data.minLevelCm - cm;
 
         sprintf(distanceStr, "%ldcm", cm);

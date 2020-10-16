@@ -47,8 +47,9 @@ namespace ui
 
     void MeasureCm::calcData()
     {
-        unsigned long cm = pingSensor->ping_cm();
-        sprintf(distanceStr, "%ld", cm);
+        // unsigned long cm = pingSensor->ping_cm();
+        unsigned long cm = pingSensor->convert_cm(pingSensor->ping_median());
+        sprintf(distanceStr, "%ldcm", cm);
     }
 
 } // namespace ui
