@@ -46,6 +46,10 @@ namespace ui
 
         if (fillFactor != -1)
         {
+            // Center line
+            display->drawLine(DISPLAY_MINX, 42, DISPLAY_MAXX, 42);
+
+            // Bar
             int barPixels = (DISPLAY_WIDTH * fillFactor) / 100;
             display->drawBox(DISPLAY_MINX + 1, 38, barPixels - 1, 8);
             display->drawLine(DISPLAY_MAXX, 38, DISPLAY_MAXX, 38 + 8);
