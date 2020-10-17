@@ -1,6 +1,6 @@
-# gas-tank-level
+# gas-oil-tank-level
 
-Easy gas tank level meter using an Arduino and a *ping* sensor
+Easy gas oil tank level meter using an Arduino and a *ping* sensor
 
 ## Hardware
 
