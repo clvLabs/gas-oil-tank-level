@@ -38,8 +38,8 @@ static const int DISPLAY_MAXX = DISPLAY_MINX + DISPLAY_WIDTH - 1;
 static const int DISPLAY_MAXY = DISPLAY_MINY + DISPLAY_HEIGHT - 1;
 
 // Level calibration
-static const unsigned int MIN_LEVEL_CM_DEFAULT = 119;
-static const unsigned int MAX_LEVEL_CM_DEFAULT = 27;
+static const unsigned int MIN_LEVEL_CM_DEFAULT = 100;
+static const unsigned int MAX_LEVEL_CM_DEFAULT = 19;
 
 // Low battery alarm
 static const long LOWBATT_PANIC_MODE_THRESHOLD_MV = 2000; // 2.000V
