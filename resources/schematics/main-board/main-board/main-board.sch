@@ -135,29 +135,7 @@ Text GLabel 5950 3000 0    50   Input ~ 0
 I2C_SCL
 Text GLabel 5950 3100 0    50   Input ~ 0
 I2C_SDA
-$Comp
-L power:GND #PWR0106
-U 1 1 5E344AA7
-P 6000 4050
-F 0 "#PWR0106" H 6000 3800 50  0001 C CNN
-F 1 "GND" V 6005 3922 50  0000 R CNN
-F 2 "" H 6000 4050 50  0001 C CNN
-F 3 "" H 6000 4050 50  0001 C CNN
-	1    6000 4050
-	0    1    1    0   
-$EndComp
-$Comp
-L power:+5V #PWR0107
-U 1 1 5E344D16
-P 6000 4350
-F 0 "#PWR0107" H 6000 4200 50  0001 C CNN
-F 1 "+5V" V 6015 4478 50  0000 L CNN
-F 2 "" H 6000 4350 50  0001 C CNN
-F 3 "" H 6000 4350 50  0001 C CNN
-	1    6000 4350
-	0    -1   -1   0   
-$EndComp
-Text GLabel 6000 4250 0    50   Input ~ 0
+Text GLabel 6000 4150 0    50   Input ~ 0
 PING_TRIGGER_PIN
 $Comp
 L Connector:Conn_01x02_Female J1
@@ -304,12 +282,12 @@ U 1 1 5F8ED365
 P 6200 4150
 F 0 "J3" H 6000 4500 50  0000 L CNN
 F 1 "Conn_01x04_Female" H 5750 4400 50  0000 L CNN
-F 2 "digikey-footprints:PinHeader_1x4_P2.54mm_Drill1.02mm" H 6200 4150 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 6200 4150 50  0001 C CNN
 F 3 "~" H 6200 4150 50  0001 C CNN
 	1    6200 4150
 	1    0    0    -1  
 $EndComp
-Text GLabel 6000 4150 0    50   Input ~ 0
+Text GLabel 6000 4250 0    50   Input ~ 0
 PING_ECHO_PIN
 Wire Wire Line
 	6350 1650 6050 1650
@@ -340,4 +318,26 @@ Wire Wire Line
 	6200 1750 6200 1900
 Wire Wire Line
 	6200 1900 6050 1900
+$Comp
+L power:+5V #PWR0107
+U 1 1 5E344D16
+P 6000 4050
+F 0 "#PWR0107" H 6000 3900 50  0001 C CNN
+F 1 "+5V" V 6015 4178 50  0000 L CNN
+F 2 "" H 6000 4050 50  0001 C CNN
+F 3 "" H 6000 4050 50  0001 C CNN
+	1    6000 4050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 5E344AA7
+P 6000 4350
+F 0 "#PWR0106" H 6000 4100 50  0001 C CNN
+F 1 "GND" V 6005 4222 50  0000 R CNN
+F 2 "" H 6000 4350 50  0001 C CNN
+F 3 "" H 6000 4350 50  0001 C CNN
+	1    6000 4350
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
